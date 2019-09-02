@@ -146,7 +146,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="hOS-66-h7v">
-                        <barButtonItem key="rightBarButtonItem" title="附近" id="Tgm-Xt-Dgz"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="QLU-pv-hYy">
+                                <connections>
+                                    <action selector="refreshBtnOnClick:" destination="BYZ-38-t0r" id="34D-vr-Ln8"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="附近" id="Tgm-Xt-Dgz"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="connectBtn" destination="sRz-yN-EBo" id="FcZ-SI-GxM"/>
@@ -155,6 +162,7 @@
                         <outlet property="mac_text" destination="tr9-0Y-w57" id="oA1-Pm-9te"/>
                         <outlet property="name_text" destination="jOg-BK-sEz" id="575-cV-HLV"/>
                         <outlet property="recive_label" destination="nbB-CD-sMc" id="K4E-NN-maP"/>
+                        <outlet property="refreshBtn" destination="QLU-pv-hYy" id="3Ha-IB-UcJ"/>
                         <outlet property="sendBtn" destination="taJ-Tk-E3x" id="e8f-gB-V6c"/>
                         <outlet property="send_text" destination="LUC-r9-2td" id="2vY-xD-qF4"/>
                     </connections>
@@ -178,6 +186,7 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCd-Xe-WTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="refresh" id="jSG-Pc-MqO"/>
             </objects>
             <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
