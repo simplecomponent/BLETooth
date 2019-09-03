@@ -22,16 +22,18 @@ public struct Device{
     var rssi:Int
 }
 class BLEService: NSObject {
-    //MARK: FUNC
+    //MARK:- FUNC
     public final func startBleService(){
-        ZXDebugSimplePrint("启动服务")
-        centerManager = CBCentralManager(delegate: self, queue: nil, options: options)
+        ZXDebugSimplePrint("启动服务\noptions:\(options)")
+        centerManager = CBCentralManager(delegate: self, queue: nil,options: options)
     }
+    // FIXME: 有BUG
+    // TODO: 还没结束
     ///扫描周边设备
     public final func scanDevice(){
         ZXDebugSimplePrint("开始扫描")
         isScanNear = true
-        deviceArr = []
+        deviceArr.removeAll()
         centerManager?.scanForPeripherals(withServices: nil, options: nil)
     }
     ///结束扫描
@@ -49,9 +51,15 @@ class BLEService: NSObject {
         centerManager?.connect(device.peripheral, options: options)
     }
     
+    /// 正常断开连接
+    ///
+    /// - Parameter device: 设备
     public func disConnectDevice(_ device:Device){
         ZXDebugSimplePrint("断开设备连接:\(device.peripheral.name ?? "nil")")
         centerManager?.cancelPeripheralConnection(device.peripheral)
+    }
+    public func write(_ data:Data,To device:Device,for characterstic:CBCharacteristic){
+        device.peripheral.writeValue(data, for: characterstic, type: .withResponse)
     }
     //MARK:- GETTER-SETTER
     //MARK:PUBLIC
@@ -59,7 +67,6 @@ class BLEService: NSObject {
     public weak var delegate:BLEProtocol?
     public var options:[String:Any]?
     
-    //MARK:- GETTER-SETTER
     //MARK:PRIVATE
     private var centerManager:CBCentralManager?
     private var deviceArr:[Device] = []{
@@ -87,6 +94,7 @@ extension BLEService:CBCentralManagerDelegate{
             delegate?.centralManagerDidUpdateState(BLEState.poweredOff)
         case .poweredOn:
             delegate?.centralManagerDidUpdateState(BLEState.poweredOn)
+        default:break
         }
     }
     
@@ -96,6 +104,9 @@ extension BLEService:CBCentralManagerDelegate{
     }
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         delegate?.didFailToConnect(peripheral, error)
+        if let index = deviceArr.firstIndex(where: { $0.peripheral == peripheral }){
+            deviceArr.remove(at: index)
+        }
     }
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         ZXDebugSimplePrint("已连接设备:\(peripheral.name ?? "nil")")
@@ -107,6 +118,21 @@ extension BLEService:CBCentralManagerDelegate{
         
     }
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+	
+//        if let kCBAdvDataManufacturerData = advertisementData["kCBAdvDataManufacturerData"] as? Data{
+//
+////            let bytes = [UInt8](kCBAdvDataManufacturerData)
+////            ZXDebugSimplePrint("bytes:\(bytes)")
+////            let str = String.init(data: kCBAdvDataManufacturerData, encoding: .utf8) ?? "？？？？？"
+////            ZXDebugSimplePrint("str:\(str)")
+//            ZXDebugSimplePrint("dataStr:\(String(data: kCBAdvDataManufacturerData, encoding: .utf8))")
+//
+//        }
+      
+//        if peripheral.name != nil{
+//            ZXDebugSimplePrint(advertisementData["kCBAdvDataLocalName"] as? String ?? "无名称")
+//            ZXDebugSimplePrint(peripheral.name ?? "无名称")
+//        }
         if deviceArr.count == 0{
             let device = Device(peripheral: peripheral, advertisementData: advertisementData, rssi: RSSI.intValue)
             deviceArr.append(device)
@@ -120,12 +146,25 @@ extension BLEService:CBCentralManagerDelegate{
             }
         }
     }
-    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        ZXDebugSimplePrint("didUpdateNotificationStateFor")
+        if let data = characteristic.value{
+            ZXDebugSimplePrint(String.init(data: data, encoding: .utf8) ?? "")
+        }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        ZXDebugSimplePrint("didUpdateValueFor")
+        if let data = characteristic.value{
+            ZXDebugSimplePrint(String.init(data: data, encoding: .utf8) ?? "")
+        }
+    }
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor descriptor: CBDescriptor, error: Error?) {
+        
+    }
 }
 
 extension BLEService:CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
         delegate?.didDiscoverServices(peripheral, error)
     }
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error: Error?) {
@@ -136,6 +175,9 @@ extension BLEService:CBPeripheralDelegate{
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        
+//        if let error = error{
+//            ZXDebugSimplePrint("didWriteValue Error:\(error.localizedDescription)")
+//        }
+        delegate?.didWriteValueFor(characteristic, error)
     }
 }

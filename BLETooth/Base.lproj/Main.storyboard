@@ -152,7 +152,11 @@
                                     <action selector="refreshBtnOnClick:" destination="BYZ-38-t0r" id="34D-vr-Ln8"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="附近" id="Tgm-Xt-Dgz"/>
+                            <barButtonItem title="附近" id="Tgm-Xt-Dgz">
+                                <connections>
+                                    <action selector="nearBtnOnClick:" destination="BYZ-38-t0r" id="PCS-KP-M9Z"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -161,6 +165,7 @@
                         <outlet property="disconnectBtn" destination="vdK-aE-EMq" id="WGo-xL-vnM"/>
                         <outlet property="mac_text" destination="tr9-0Y-w57" id="oA1-Pm-9te"/>
                         <outlet property="name_text" destination="jOg-BK-sEz" id="575-cV-HLV"/>
+                        <outlet property="nearBaritem" destination="Tgm-Xt-Dgz" id="VQt-1r-aaN"/>
                         <outlet property="recive_label" destination="nbB-CD-sMc" id="K4E-NN-maP"/>
                         <outlet property="refreshBtn" destination="QLU-pv-hYy" id="3Ha-IB-UcJ"/>
                         <outlet property="sendBtn" destination="taJ-Tk-E3x" id="e8f-gB-V6c"/>

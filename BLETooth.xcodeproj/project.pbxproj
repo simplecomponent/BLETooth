@@ -12,6 +12,7 @@
 		D51390F92318FB53003401EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51390F72318FB53003401EB /* Main.storyboard */; };
 		D51390FB2318FB54003401EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D51390FA2318FB54003401EB /* Assets.xcassets */; };
 		D51390FE2318FB54003401EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51390FC2318FB54003401EB /* LaunchScreen.storyboard */; };
+		D51F13D8231E7CD3006FC8CC /* NearByViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F13D7231E7CD3006FC8CC /* NearByViewController.swift */; };
 		FA91E3F3231BD27A00FBCF15 /* BLEService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91E3F2231BD27A00FBCF15 /* BLEService.swift */; };
 		FA91E3F5231BD2AF00FBCF15 /* BLEProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91E3F4231BD2AF00FBCF15 /* BLEProtocol.swift */; };
 		FA91E3F7231BD59900FBCF15 /* Define.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA91E3F6231BD59900FBCF15 /* Define.swift */; };
@@ -25,6 +26,7 @@
 		D51390FA2318FB54003401EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D51390FD2318FB54003401EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D51390FF2318FB54003401EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D51F13D7231E7CD3006FC8CC /* NearByViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByViewController.swift; sourceTree = "<group>"; };
 		FA91E3F2231BD27A00FBCF15 /* BLEService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEService.swift; sourceTree = "<group>"; };
 		FA91E3F4231BD2AF00FBCF15 /* BLEProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEProtocol.swift; sourceTree = "<group>"; };
 		FA91E3F6231BD59900FBCF15 /* Define.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Define.swift; path = class/Define.swift; sourceTree = SOURCE_ROOT; };
@@ -63,6 +65,7 @@
 				FA91E3F1231BD26100FBCF15 /* class */,
 				D51390F32318FB53003401EB /* AppDelegate.swift */,
 				D51390F52318FB53003401EB /* ViewController.swift */,
+				D51F13D7231E7CD3006FC8CC /* NearByViewController.swift */,
 				D51390F72318FB53003401EB /* Main.storyboard */,
 				D51390FA2318FB54003401EB /* Assets.xcassets */,
 				D51390FC2318FB54003401EB /* LaunchScreen.storyboard */,
@@ -162,6 +165,7 @@
 				D51390F42318FB53003401EB /* AppDelegate.swift in Sources */,
 				FA91E3F7231BD59900FBCF15 /* Define.swift in Sources */,
 				FA91E3F3231BD27A00FBCF15 /* BLEService.swift in Sources */,
+				D51F13D8231E7CD3006FC8CC /* NearByViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

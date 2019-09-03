@@ -49,5 +49,9 @@ protocol BLEProtocol: AnyObject {
     func onScan(_ devices:[Device])
     
     func didDiscoverCharacteristicsFor(_ service: CBService, _ error: Error?)
+    
+    func didUpdateValueFor(_ characteristic: CBCharacteristic, _ error: Error?)
+    
+    func didWriteValueFor (_ characteristic: CBCharacteristic,_ error: Error?)
 }
 

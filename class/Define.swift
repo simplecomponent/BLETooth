@@ -22,7 +22,7 @@ func ZXDebugSimplePrint<T>(_ debugStr:T,
                            methodName:String = #function)
 {
     #if DEBUG
-    print("----------------------------\nZXDebug:\(debugStr)\nfrom:\(methodName)\n----------------------------\n")
+    print("----------------------------\nZXDebug:\n\(debugStr)\nfrom:\(methodName)\n----------------------------\n")
     #else
     #endif
 }
